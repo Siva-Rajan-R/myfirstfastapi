@@ -12,7 +12,7 @@ def signup(request:create):
     print(request.email)
     if request.email not in db:
         db[request.email]=request.password
-        return {'detail':'signuped successfully'}
+        return {'detail':'sign_uped successfully'}
     return {'detail':'email already exists'}
 
 @app.get('/login/{email}/{password}')
