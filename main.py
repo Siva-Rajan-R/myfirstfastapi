@@ -24,7 +24,7 @@ def signup(request:create):
     if db.child('login_users').child(request.email.replace('.','c')).get().each()==None:
         dbt[request.email]=request.password
         db.child('login_users').child(request.email.replace('.','c')).set({request.email.replace('.','c'):request.password})
-        return {'detail':'sign_uped successfully'}
+        return {'detail':'ulla vanthutada'}
     return {'detail':'email already exists'}
 
 @app.get('/login/{email}/{password}')
