@@ -30,7 +30,7 @@ def signup(request:create,requests:Request):
     return {'detail':'email already exists'}
 
 @app.get('/login/{email}/{password}')
-def login(email:Emailstr,password:str,request:Request):
+def login(email:EmailStr,password:str,request:Request):
     headers = dict(request.headers)  # Convert headers to a dictionary
     print("headers from : ",headers) 
     a=db.child('login_users').child(email.replace('.','c')).get()
