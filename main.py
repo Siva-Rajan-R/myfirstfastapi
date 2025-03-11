@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI.Request
 from pydantic import BaseModel,EmailStr
 import pyrebase
 app=FastAPI()
@@ -20,7 +20,9 @@ class create(BaseModel):
     password:str
 
 @app.post('/signup')
-def signup(request:create):
+def signup(request:create,request:Request):
+    headers = dict(request.headers)  # Convert headers to a dictionary
+    print("headers from : ",headers)  # Print headers to the console
     if db.child('login_users').child(request.email.replace('.','c')).get().each()==None:
         dbt[request.email]=request.password
         db.child('login_users').child(request.email.replace('.','c')).set({request.email.replace('.','c'):request.password})
@@ -28,7 +30,9 @@ def signup(request:create):
     return {'detail':'email already exists'}
 
 @app.get('/login/{email}/{password}')
-def login(email,password):
+def login(email:Emailstr,password:str,request:Request):
+    headers = dict(request.headers)  # Convert headers to a dictionary
+    print("headers from : ",headers) 
     a=db.child('login_users').child(email.replace('.','c')).get()
     if a.each()!=None:
         for i in a.each():
