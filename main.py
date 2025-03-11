@@ -20,8 +20,8 @@ class create(BaseModel):
     password:str
 
 @app.post('/signup')
-def signup(request:create,request:Request):
-    headers = dict(request.headers)  # Convert headers to a dictionary
+def signup(request:create,requests:Request):
+    headers = dict(requests.headers)  # Convert headers to a dictionary
     print("headers from : ",headers)  # Print headers to the console
     if db.child('login_users').child(request.email.replace('.','c')).get().each()==None:
         dbt[request.email]=request.password
